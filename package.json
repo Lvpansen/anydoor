@@ -1,0 +1,27 @@
+{
+  "name": "anydoor",
+  "version": "1.0.0",
+  "description": "Tiny NodeJs Static Web Server",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "pre-commit": [
+      "lint"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lvpansen/anydoor.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lvpansen/anydoor/issues"
+  },
+  "homepage": "https://github.com/Lvpansen/anydoor#readme",
+  "devDependencies": {
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
+    "pre-commit": "^1.2.2"
+  }
+}
