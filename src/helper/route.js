@@ -22,9 +22,7 @@ module.exports = async function(req,res,filePath){
       const files = await readdir(filePath);
       res.statusCode = 200;
       res.setHeader('Content-Type','text/html');
-      console.info(config.root,filePath)
       const dir = path.relative(config.root,filePath)
-      console.log(dir)
       const data = {
         title:path.basename(filePath),
         dir:dir ? `/${dir}` : '',
@@ -33,7 +31,6 @@ module.exports = async function(req,res,filePath){
       res.end(template(data));
     }
   } catch (error) {
-    console.log(error)
     res.statusCode = 404;
     res.setHeader('Content-Type','text/plain');
     res.end(`${filePath} is not a directory or file`);
