@@ -6,6 +6,7 @@ const promisify = require('util').promisify;
 const stat = promisify(fs.stat);
 const readdir = promisify(fs.readdir);
 const config = require('../config/defaultConfig');
+const compress = require('./compress');
 
 const tplPath = path.join(__dirname,'../template/dir.tpl');
 const source = fs.readFileSync(tplPath,'utf8');
@@ -17,7 +18,11 @@ module.exports = async function(req,res,filePath){
     if (stats.isFile()) {
       res.statusCode = 200;
       res.setHeader('Content-Type','text/plain');
-      fs.createReadStream(filePath).pipe(res);
+      let rs = fs.createReadStream(filePath);
+      if (filePath.match(config.compress)) {
+        rs = compress(rs,req,res)
+      }
+      rs.pipe(res);
     } else if (stats.isDirectory()) {
       const files = await readdir(filePath);
       res.statusCode = 200;
